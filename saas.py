@@ -143,7 +143,7 @@ def filter_modules(s, regexp):
 portal_modules = filter_modules(args.get('install_modules', ''), SAAS_PORTAL_MODULES_REGEXP)
 portal_modules.union((args.get('portal_install_modules') or '').split(','))
 portal_modules.add('saas_portal')
-portal_modules.add('saas_server')
+#portal_modules.add('saas_server')
 
 server_modules = filter_modules(args.get('install_modules', ''), SAAS_SERVER_MODULES_REGEXP)
 server_modules.union((args.get('server_install_modules') or '').split(','))
