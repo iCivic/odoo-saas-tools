@@ -147,7 +147,7 @@
 )d" type="action" class="oe_highlight" states="draft"/>
                         -->
                         <button string="Open Server" name="action_redirect_to_server" type="object" icon="fa-sign-in" class="oe_highlight" attrs="{'invisible': [('id', '=', False)]}"/>
-                        <button name="action_sync_server" type="object" string="Sync server" icon="fa-refresh" attrs="{'invisible': [('id', '=', False)]}"/>
+                        <button name="action_sync_server_all" type="object" string="Sync server" icon="fa-refresh" attrs="{'invisible': [('id', '=', False)]}"/>
                         <field name="id" invisible="1" />
                     </header>
                     <sheet>

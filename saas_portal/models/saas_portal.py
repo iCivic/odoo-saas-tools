@@ -117,7 +117,7 @@ class SaasPortalServer(models.Model):
             'url': url
         }
 
-    @api.model
+    @api.one
     def action_sync_server_all(self):
         self.search([]).action_sync_server()
         self.env['saas_portal.client'].search([]).storage_usage_monitoring()
