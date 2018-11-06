@@ -57,8 +57,7 @@ settings_group.add_argument('--local-xmlrpc-port', dest='local_xmlrpc_port', def
 settings_group.add_argument('--local-portal-host', dest='local_portal_host', help='Address for internal connection to portal', default="localhost")
 settings_group.add_argument('--local-server-host', dest='local_server_host', help='Address for internal connection to portal', default="localhost")
 settings_group.add_argument('--odoo-log-db', dest='log_db', help='Logging database. The same as odoo parameter')
-settings_group.add_argument("--odoo-addons-path", dest="addons_path",
-                            help="specify additional addons paths (separated by commas).")
+settings_group.add_argument("--odoo-addons-path", dest="addons_path", help="specify additional addons paths (separated by commas).")
 settings_group.add_argument('--odoo-db-filter', dest='db_filter', default='%h')
 settings_group.add_argument('--odoo-test-enable', dest='test_enable', action='store_true')
 settings_group.add_argument('--odoo-without-demo', dest='without_demo', action='store_true', default=False)
@@ -239,7 +238,7 @@ def createdb(dbname):
     without_demo = args.get('without_demo')
     main_url = 'http://localhost:%s' % xmlrpc_port
     demo = not without_demo
-    lang = 'en_US'  # TODO
+    lang = 'zh_CN'  # TODO
     admin_password = args.get('admin_password')
 
     rpc_db = xmlrpclib.ServerProxy('{}/xmlrpc/2/db'.format(main_url))
@@ -287,6 +286,7 @@ def rpc_auth(dbname, admin_username='admin', admin_password='admin', host='local
 
 def rpc_execute_kw(auth, model, method, rpc_args=[], rpc_kwargs={}):
     dbname, models, admin_uid, admin_password = auth
+    log('dbname', dbname)
     log('auth', auth)
     log('RPC Execute', model, method, rpc_args, rpc_kwargs)
     if args.get('simulate'):
@@ -414,7 +414,7 @@ def rpc_create_plan(portal_db_name):
     plan_template_db_name = args.get('plan_template_db_name')
     plan_clients = args.get('plan_clients')
 
-    auth = rpc_auth(portal_db_name, admin_password=args.get('admin_password'))
+    auth = rpc_auth(portal_db_name, admin_password=args.get('admin_password'), host=args.get('local_portal_host'))
 
     # 6. Create Plan
     #    * open Saas/SaaS/Plans
