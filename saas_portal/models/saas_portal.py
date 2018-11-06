@@ -102,6 +102,7 @@ class SaasPortalServer(models.Model):
             'expires_in': 3600,
         })
         url = '{scheme}://{host}:{port}{path}'.format(scheme=scheme, host=host, port=port, path=path)
+        print "_request_server: ", url
         req = requests.Request('GET', url, data=params, headers={'host': self.host})
         req_kwargs = {'verify': self.verify_ssl}
         return req.prepare(), req_kwargs
@@ -174,10 +175,12 @@ class SaasPortalPlan(models.Model):
     block_on_storage_exceed = fields.Boolean('Block clients on storage exceed', default=False)
 
     def _get_default_lang(self):
-        return self.env.lang
+        # return self.env.lang
+        return "zh_CN"
 
     def _default_tz(self):
-        return self.env.user.tz
+        return "Asia/Chongqing"
+        # return self.env.user.tz
 
     lang = fields.Selection(scan_languages(), 'Language', default=_get_default_lang)
     tz = fields.Selection(_tz_get, 'TimeZone', default=_default_tz)
